@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 import os
-import dj_database_url
+# import dj_database_url
 if os.path.isfile('env.py'):
     import env
 from pathlib import Path
@@ -82,8 +82,11 @@ WSGI_APPLICATION = 'realworldrealestates.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'realworldrealestatedb',
+        'USER': 'postgres',
+        'PASSWORD': 'J3tlinep@55',
+        'HOST': 'localhost'
     }
 }
 
