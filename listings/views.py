@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from listings.models import Listing
 
 
+# Adding context allows us to access the data on the templates
 def index(request):
     listings = Listing.objects.order_by(
         '-list_date').filter(is_published=True)  # sort by most recent
@@ -17,7 +18,13 @@ def index(request):
 
 
 def listing(request, listing_id):
-    return render(request, 'listings/listing.html')
+    listing = get_object_or_404(Listing, pk=listing_id)
+
+    context = {
+        'listing': listing
+    }
+
+    return render(request, 'listings/listing.html', context)
 
 
 def search(request):
