@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from listings.models import Listing
+from .choices import price_choices, bedroom_choices, county_choices
 
 
 # Adding context allows us to access the data on the templates
@@ -12,8 +13,9 @@ def index(request):
     paged_listings = paginator.get_page(page)
 
     context = {
-        'listings': paged_listings
+        'listings': paged_listings,
     }
+
     return render(request, 'listings/listings.html', context)
 
 
@@ -28,4 +30,10 @@ def listing(request, listing_id):
 
 
 def search(request):
-    return render(request, 'listings/search.html')
+
+    context = {
+        'bedroom_choices': bedroom_choices,
+        'price_choices': price_choices,
+        'county_choices': county_choices,
+    }
+    return render(request, 'listings/search.html', context)

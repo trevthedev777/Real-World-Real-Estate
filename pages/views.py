@@ -2,6 +2,7 @@ from django.shortcuts import render
 
 from listings.models import Listing
 from realtors.models import Realtor
+from listings.choices import price_choices, bedroom_choices, county_choices
 
 
 def index(request):
@@ -9,7 +10,10 @@ def index(request):
         '-list_date').filter(is_published=True)[:3]
 
     context = {
-        'listings': listings
+        'listings': listings,
+        'bedroom_choices': bedroom_choices,
+        'price_choices': price_choices,
+        'county_choices': county_choices,
     }
     return render(request, 'pages/index.html', context)
 
