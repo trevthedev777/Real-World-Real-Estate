@@ -30,10 +30,26 @@ def listing(request, listing_id):
 
 
 def search(request):
+    queryset_list = Listing.objects.order_by('-list_date')
+
+    # keywords
+    if 'keywords' in request.GET:
+        keywords = request.GET['keywords']
+        if keywords:
+            queryset_list = queryset_list.filter(
+                description__icontains=keywords)
+
+    # city
+    if 'city' in request.GET:
+        city = request.GET['city']
+        if city:
+            queryset_list = queryset_list.filter(
+                description__iexact=city)
 
     context = {
         'bedroom_choices': bedroom_choices,
         'price_choices': price_choices,
         'county_choices': county_choices,
+        'listings': queryset_list
     }
     return render(request, 'listings/search.html', context)
