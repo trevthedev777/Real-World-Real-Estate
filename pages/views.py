@@ -30,7 +30,3 @@ def about(request):
         'rotm_realtors': rotm_realtors
     }
     return render(request, 'pages/about.html', context)
-
-
-# def about(request):
-#     return render(request, 'pages/listings.html')
