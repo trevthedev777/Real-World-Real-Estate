@@ -86,11 +86,8 @@ WSGI_APPLICATION = 'realworldrealestates.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'realworldrealestatedb',
-        'USER': 'postgres',
-        'PASSWORD': 'J3tlinep@55',
-        'HOST': 'localhost'
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -119,6 +116,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+CSRF_TRUSTED_ORIGINS = [ 'https://*.gitpod.io' ]
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/

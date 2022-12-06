@@ -86,10 +86,11 @@ def edit_profile(request, pk):
     user = User.objects.get(id=pk)
 
     if request.method == 'POST':
-        ...
-        user.name = request.GET['name']
-        user.email_address = request.GET['email_address']
 
+        user.first_name = request.POST.get('first_name')
+        # user.last_name = request.POST.get('last_name')
+        user.email = request.POST.get('email')
+        # print(request.POST['name'])
         user.save()
         return redirect('dashboard')
 
@@ -97,7 +98,7 @@ def edit_profile(request, pk):
         'user': user
         }
         
-    return render(request, 'accounts/dashboard.html', context)
+    return render(request, 'accounts/edit_profile.html', context)
 
 
 @login_required(login_url='login')
@@ -116,5 +117,7 @@ def delete_profile(request, pk):
     context = {
         'user': user
     }
+
+    
 
     return render(request, 'index.html', context)
