@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from django.contrib import messages, auth
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -73,8 +73,48 @@ def logout(request):
 def dashboard(request):
     user_contacts = Contact.objects.order_by(
         '-contact_date').filter(user_id=request.user.id)
-
+    
     context = {
         'contacts': user_contacts
     }
     return render(request, 'accounts/dashboard.html', context)
+
+
+@login_required(login_url='login')
+def edit_profile(request, pk):
+
+    user = User.objects.get(id=pk)
+
+    if request.method == 'POST':
+        ...
+        user.name = request.GET['name']
+        user.email_address = request.GET['email_address']
+
+        user.save()
+        return redirect('dashboard')
+
+    context = {
+        'user': user
+        }
+        
+    return render(request, 'accounts/dashboard.html', context)
+
+
+@login_required(login_url='login')
+def delete_profile(request, pk):
+
+    user = User.objects.get(id=pk)
+
+    if request.method == 'POST':
+        ...
+        user.name = request.GET['name']
+        user.email_address = request.GET['email_address']
+
+        user.delete()
+        return redirect('index')
+
+    context = {
+        'user': user
+    }
+
+    return render(request, 'index.html', context)
