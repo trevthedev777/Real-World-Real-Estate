@@ -88,36 +88,35 @@ def edit_profile(request, pk):
     if request.method == 'POST':
 
         user.first_name = request.POST.get('first_name')
-        # user.last_name = request.POST.get('last_name')
         user.email = request.POST.get('email')
-        # print(request.POST['name'])
+        user.phone = request.POST.get('phone')
         user.save()
         return redirect('dashboard')
 
     context = {
         'user': user
         }
+
+    if request.GET.get("delete"):
+        user.delete()
         
     return render(request, 'accounts/edit_profile.html', context)
 
 
-@login_required(login_url='login')
-def delete_profile(request, pk):
+# @login_required(login_url='login')
+# def delete_profile(request, pk):
 
-    user = User.objects.get(id=pk)
+#     user = User.objects.get(id=pk)
+#     print(f"User: {user}")
 
-    if request.method == 'POST':
-        ...
-        user.name = request.GET['name']
-        user.email_address = request.GET['email_address']
+#     if request.method == 'POST':
 
-        user.delete()
-        return redirect('index')
+#         user.objects.all()
+#         user.delete()
+#         return redirect('index.html')
 
-    context = {
-        'user': user
-    }
+#     context = {
+#         'user': user
+#     }
 
-    
-
-    return render(request, 'index.html', context)
+#     return render(request, 'index.html', context)

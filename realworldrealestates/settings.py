@@ -30,7 +30,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['real-world-real-estates.herokuapp.com/', 'localhost']
+ALLOWED_HOSTS = ['real-world-real-estates.herokuapp.com', 'localhost']
 
 
 # Application definition
@@ -84,16 +84,16 @@ WSGI_APPLICATION = 'realworldrealestates.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
 # DATABASES = {
-#     'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
 # }
+
+DATABASES = {
+    'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
+}
 
 # push local database: PGUSER = postgres PGPASSWORD = password  heroku pg: push postgres: // name_of_host/name_of_local_database nameOfHerokuDB
 
